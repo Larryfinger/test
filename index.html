@@ -15,13 +15,7 @@
       scroll-behavior: smooth;
       font-family: Arial, sans-serif;
       overflow-x: hidden;
-    }
-    .parallax {
-      height: 100vh;
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
+      background-color: #111;
     }
     .section {
       height: 100vh;
@@ -31,36 +25,69 @@
       font-size: 2rem;
       color: white;
       text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+      position: relative;
+      z-index: 2;
     }
-    #intro {
-      background-color: #111;
+    .parallax-container {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
     }
-    #parallax1 {
-      background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb');
+    .parallax-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 120%;
+      object-fit: cover;
+      transform: translateY(0);
+      transition: transform 0.1s ease-out;
+      z-index: 1;
     }
-    #parallax2 {
-      background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e');
-    }
-    #outro {
-      background-color: #222;
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 2;
     }
   </style>
 </head>
 <body>
-  <section class="section" id="intro">
+  <section class="section" style="background-color: #111;">
     <h1>Witaj na moim vlogu fotograficznym</h1>
   </section>
 
-  <div class="parallax" id="parallax1"></div>
+  <div class="parallax-container">
+    <img class="parallax-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Parallax 1" />
+    <div class="overlay"></div>
+  </div>
 
-  <section class="section" style="background-color: #333;">
+  <section class="section" style="background-color: #222;">
     <p>Tu znajdziesz zdjęcia z moich podróży</p>
   </section>
 
-  <div class="parallax" id="parallax2"></div>
+  <div class="parallax-container">
+    <img class="parallax-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Parallax 2" />
+    <div class="overlay"></div>
+  </div>
 
-  <section class="section" id="outro">
+  <section class="section" style="background-color: #333;">
     <p>Zapraszam do śledzenia kolejnych wpisów</p>
   </section>
+
+  <script>
+    const parallaxImages = document.querySelectorAll('.parallax-image');
+
+    window.addEventListener('scroll', () => {
+      parallaxImages.forEach(img => {
+        const speed = 0.3;
+        const offset = window.pageYOffset;
+        img.style.transform = `translateY(${offset * speed}px)`;
+      });
+    });
+  </script>
 </body>
 </html>
