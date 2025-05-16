@@ -25,9 +25,22 @@
       background: rgba(0, 0, 0, 0.7);
       color: white;
       z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     header h1 {
       font-size: 1.5rem;
+    }
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ffcc00;
     }
     .section {
       height: 100vh;
@@ -69,14 +82,23 @@
       z-index: 3;
       font-size: 2rem;
     }
+    section {
+      scroll-margin-top: 80px;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Moje podróże i fotografia</h1>
+    <nav>
+      <a href="#home">Strona główna</a>
+      <a href="#about">O mnie</a>
+      <a href="#gallery">Galeria</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
   </header>
 
-  <div class="parallax-section">
+  <div id="home" class="parallax-section">
     <img class="parallax-bg" src="https://images.unsplash.com/photo-1521334884684-d80222895322" alt="Intro Background" />
     <div class="overlay"></div>
     <div class="section section-content">
@@ -85,14 +107,14 @@
     </div>
   </div>
 
-  <section class="section" style="background-color: #111;">
+  <section id="about" class="section" style="background-color: #111;">
     <div class="section-content">
       <h2>O mnie</h2>
       <p>Jestem pasjonatem podróży i fotografii. Dokumentuję świat tak, jak go widzę.</p>
     </div>
   </section>
 
-  <div class="parallax-section">
+  <div id="gallery" class="parallax-section">
     <img class="parallax-bg" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Parallax 1" />
     <div class="overlay"></div>
   </div>
@@ -109,7 +131,7 @@
     <div class="overlay"></div>
   </div>
 
-  <section class="section" style="background-color: #333;">
+  <section id="contact" class="section" style="background-color: #333;">
     <div class="section-content">
       <h2>Kontakt</h2>
       <p>Masz pytania lub chcesz współpracować? Napisz do mnie!</p>
