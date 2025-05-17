@@ -69,7 +69,7 @@ nav a.active {
 </head>
 <body>
   <header>
-    <h1>OLA</h1>
+    <h1>RAF</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
@@ -107,7 +107,7 @@ nav a.active {
     </div>
   </section>
 
-  <div class="parallax-section">
+  <div id="portfolio" class="parallax-section">
     <img class="parallax-bg" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" alt="Parallax 2" />
     <div class="overlay"></div>
   </div>
@@ -126,7 +126,7 @@ nav a.active {
     let current = '';
     const fromTop = window.scrollY + 150;
 
-    document.querySelectorAll('section[id], div[id].parallax-section').forEach(section => {
+    document.querySelectorAll('section[id], div.parallax-section[id]').forEach(section => {
       const sectionTop = section.offsetTop;
       const sectionHeight = section.offsetHeight;
       if (fromTop >= sectionTop && fromTop < sectionTop + sectionHeight) {
