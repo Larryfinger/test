@@ -23,8 +23,20 @@
       position: relative;
       overflow: hidden;
     }
-    #intro-bg,
-    #intro-fg {
+   #intro-bg,
+#intro-fg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  pointer-events: none;
+}
+#intro-bg { z-index: 0; }
+#intro-fg { z-index: 1; }
+
       position: absolute;
       bottom: 0;
       left: 0;
@@ -75,7 +87,7 @@
 </head>
 <body>
   <header>
-    <h1>WW</h1>
+    <h1>MM</h1>
     <nav>
       <a href="#home" id="link-home">Strona główna</a>
       <a href="#about" id="link-about">O mnie</a>
@@ -155,27 +167,27 @@
     window.addEventListener('scroll', updateActiveLink);
     window.addEventListener('load', updateActiveLink);
 
-    const parallaxBgs = document.querySelectorAll('.parallax-bg');
-    const darkenLayer = document.getElementById('intro-darken');
+    const homeSection = document.getElementById('home');
+const homeTop = homeSection.offsetTop;
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const relOffset = Math.max(0, scrollY - homeTop); // przesuw tylko gdy sekcja HOME na ekranie
 
-    window.addEventListener('scroll', () => {
-      const offset = window.pageYOffset;
+  parallaxBgs.forEach(bg => {
+    let speed = 0.3; // domyślny dla tła
+    if (bg.id === 'intro-fg') speed = 0.15; // dwa razy wolniej dla PNG
+    bg.style.transform = `translateY(${relOffset * speed}px)`;
+  });
 
-      parallaxBgs.forEach(bg => {
-        // Default: tło szybciej (0.3), PNG wolniej (0.15)
-        let speed = 0.3;
-        if (bg.id === 'intro-fg') speed = 0.15;
-        bg.style.transform = `translateY(${offset * speed}px)`;
-      });
+  if (darkenLayer) {
+    const fadeStart = 0;
+    const fadeEnd = window.innerHeight;
+    let opacity = (relOffset - fadeStart) / (fadeEnd - fadeStart);
+    opacity = Math.max(0, Math.min(0.12, opacity));
+    darkenLayer.style.opacity = opacity;
+  }
+});
 
-      if (darkenLayer) {
-        const fadeStart = 0;
-        const fadeEnd = window.innerHeight;
-        let opacity = (offset - fadeStart) / (fadeEnd - fadeStart);
-        opacity = Math.max(0, Math.min(0.12, opacity));
-        darkenLayer.style.opacity = opacity;
-      }
-    });
   </script>
 </body>
 </html>
