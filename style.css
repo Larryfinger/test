@@ -91,6 +91,9 @@ section {
   scroll-margin-top: 80px;
 }
 
+will-change: opacity;
+transform: translateZ(0);
+
 /* Naprawa przezroczystości dla efektu fade */
 #home .overlay,
 #home .section-content {
