@@ -67,6 +67,7 @@
       transform: translateY(0);
       transition: transform 0.1s ease-out, opacity 0.1s ease-out;
       z-index: 1;
+      opacity: 1;
     }
     .overlay {
       position: absolute;
@@ -74,7 +75,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.4);
+      background: none;
       z-index: 2;
     }
     .section-content {
@@ -89,7 +90,7 @@
 </head>
 <body>
   <header>
-    <h1>Larryfinger</h1>
+    <h1>Moje podróże i fotografia</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
@@ -99,12 +100,13 @@
   </header>
 
   <div id="home" class="parallax-section">
-  <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
-  <div class="section section-content">
-    <h2>Witaj na mojej stronie</h2>
-    <p>Fotografia. Pasja. Podróże.</p>
+    <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
+    <div class="overlay"></div>
+    <div class="section section-content">
+      <h2>Witaj na mojej stronie</h2>
+      <p>Fotografia. Pasja. Podróże.</p>
+    </div>
   </div>
-</div>
 
   <section id="about" class="section" style="background-color: #111;">
     <div class="section-content">
@@ -149,12 +151,13 @@
         bg.style.transform = `translateY(${offset * speed}px)`;
       });
 
-      // Zmiana opacity dla pierwszego zdjęcia
-      const fadeStart = 0;
-      const fadeEnd = window.innerHeight;
-      let opacity = 1 - (offset - fadeStart) / (fadeEnd - fadeStart);
-      opacity = Math.max(0.2, Math.min(1, opacity));
-      introBg.style.opacity = opacity;
+      if (introBg) {
+        const fadeStart = 0;
+        const fadeEnd = window.innerHeight;
+        let opacity = 1 - (offset - fadeStart) / (fadeEnd - fadeStart);
+        opacity = Math.max(0.2, Math.min(1, opacity));
+        introBg.style.opacity = opacity;
+      }
     });
   </script>
 </body>
