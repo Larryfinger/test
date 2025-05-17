@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     #intro-bg {
-      transition: opacity 0.5s ease-out;
       z-index: 0;
     }
     #home .overlay {
@@ -18,14 +17,26 @@
     #home .section-content {
       background: transparent;
       position: relative;
+      z-index: 3;
+      pointer-events: none;
+    }
+    #home .darken-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
       z-index: 2;
       pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>AA</h1>
+    <h1>CC</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
@@ -36,6 +47,7 @@
 
   <div id="home" class="parallax-section">
     <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
+    <div class="darken-layer" id="intro-darken"></div>
     <div class="overlay"></div>
     <div class="section section-content">
       <h2>Witaj na mojej stronie</h2>
@@ -76,7 +88,7 @@
 
   <script>
     const parallaxBgs = document.querySelectorAll('.parallax-bg');
-    const introBg = document.getElementById('intro-bg');
+    const darkenLayer = document.getElementById('intro-darken');
 
     window.addEventListener('scroll', () => {
       const offset = window.pageYOffset;
@@ -86,12 +98,12 @@
         bg.style.transform = `translateY(${offset * speed}px)`;
       });
 
-      if (introBg) {
+      if (darkenLayer) {
         const fadeStart = 0;
         const fadeEnd = window.innerHeight;
-        let opacity = 1 - (offset - fadeStart) / (fadeEnd - fadeStart);
-        opacity = Math.max(0.2, Math.min(1, opacity));
-        introBg.style.opacity = opacity;
+        let opacity = (offset - fadeStart) / (fadeEnd - fadeStart);
+        opacity = Math.max(0, Math.min(0.8, opacity));
+        darkenLayer.style.opacity = opacity;
       }
     });
   </script>
