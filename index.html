@@ -69,7 +69,7 @@ nav a.active {
 </head>
 <body>
   <header>
-    <h1>RR</h1>
+    <h1>AA</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
@@ -140,15 +140,6 @@ nav a.active {
         link.classList.add('active');
       } else {
         link.classList.remove('active');
-      }
-    });
-  }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === '#' + current) {
-        link.classList.add('active');
       }
     });
   }
