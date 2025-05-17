@@ -19,16 +19,11 @@
       z-index: 1000;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
-    #intro-bg {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: bottom;
-      z-index: 0;
+    #home {
+      position: relative;
+      overflow: hidden;
     }
+    #intro-bg,
     #intro-fg {
       position: absolute;
       bottom: 0;
@@ -37,9 +32,10 @@
       height: 100%;
       object-fit: cover;
       object-position: bottom;
-      z-index: 1; /* Nad tłem, pod tekstem */
       pointer-events: none;
     }
+    #intro-bg { z-index: 0; }
+    #intro-fg { z-index: 1; }
     #home .overlay {
       background: none;
       pointer-events: none;
@@ -79,7 +75,7 @@
 </head>
 <body>
   <header>
-    <h1>EE</h1>
+    <h1>WW</h1>
     <nav>
       <a href="#home" id="link-home">Strona główna</a>
       <a href="#about" id="link-about">O mnie</a>
@@ -89,15 +85,15 @@
   </header>
 
   <div id="home" class="parallax-section">
-  <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
-  <img id="intro-fg" class="parallax-bg parallax-slow" src="intro_2.png" alt="Overlay" />
-  <div class="darken-layer" id="intro-darken"></div>
-  <div class="overlay"></div>
-  <div class="section section-content">
-    <h2>Witaj na mojej stronie</h2>
-    <p>Fotografia. Pasja. Podróże.</p>
+    <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
+    <img id="intro-fg" class="parallax-bg parallax-slow" src="intro_2.png" alt="Overlay" />
+    <div class="darken-layer" id="intro-darken"></div>
+    <div class="overlay"></div>
+    <div class="section section-content">
+      <h2>Witaj na mojej stronie</h2>
+      <p>Fotografia. Pasja. Podróże.</p>
+    </div>
   </div>
-</div>
 
   <section id="about" class="section" style="background-color: #111;">
     <div class="section-content">
@@ -165,13 +161,10 @@
     window.addEventListener('scroll', () => {
       const offset = window.pageYOffset;
 
-     parallaxBgs.forEach(bg => {
-  let speed = 0.3; // Domyślna prędkość
-  if (bg.classList.contains('parallax-slow')) {
-    speed = 0.15; // O połowę wolniej dla intro_2.png!
-  }
-  bg.style.transform = `translateY(${offset * speed}px)`;
-});
+      parallaxBgs.forEach(bg => {
+        // Default: tło szybciej (0.3), PNG wolniej (0.15)
+        let speed = 0.3;
+        if (bg.id === 'intro-fg') speed = 0.15;
         bg.style.transform = `translateY(${offset * speed}px)`;
       });
 
