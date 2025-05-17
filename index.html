@@ -121,14 +121,26 @@ nav a.active {
 
   <script>
     const navLinks = document.querySelectorAll('nav a');
+const sectionMap = new Map();
+navLinks.forEach(link => {
+  const section = document.querySelector(link.hash);
+  if (section) {
+    sectionMap.set(link, section);
+  }
+});
 
     function updateActiveLink() {
-      let fromTop = window.scrollY + 80;
-      navLinks.forEach(link => {
-        const section = document.querySelector(link.hash);
-        if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
-          link.classList.add('active');
-        } else {
+  let fromTop = window.scrollY + window.innerHeight / 2;
+  sectionMap.forEach((section, link) => {
+    const top = section.offsetTop;
+    const bottom = top + section.offsetHeight;
+    if (fromTop >= top && fromTop < bottom) {
+      link.classList.add('active');
+    } else {
+      link.classList.remove('active');
+    }
+  });
+} else {
           link.classList.remove('active');
         }
       });
