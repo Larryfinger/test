@@ -90,6 +90,17 @@ nav a:hover {
 section {
   scroll-margin-top: 80px;
 }
+.intro-foreground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+  z-index: 1; /* nad tłem, pod tekstem */
+  pointer-events: none;
+}
 
 will-change: opacity;
 transform: translateZ(0);
