@@ -69,12 +69,12 @@ nav a.active {
 </head>
 <body>
   <header>
-    <h1>RP</h1>
+    <h1>PP</h1>
     <nav>
-      <a href="#home">Strona główna</a>
-      <a href="#about">O mnie</a>
-      <a href="#gallery">Galeria</a>
-      <a href="#contact">Kontakt</a>
+      <a href="#home" id="link-home">Strona główna</a>
+      <a href="#about" id="link-about">O mnie</a>
+      <a href="#gallery" id="link-gallery">Galeria</a>
+      <a href="#contact" id="link-contact">Kontakt</a>
     </nav>
   </header>
 
@@ -124,7 +124,7 @@ nav a.active {
 
   function updateActiveLink() {
     let current = '';
-    const fromTop = window.scrollY + 200;
+    const fromTop = window.scrollY + 150;
 
     document.querySelectorAll('section[id], div.parallax-section[id]').forEach(section => {
       const sectionTop = section.offsetTop;
@@ -136,7 +136,8 @@ nav a.active {
 
     navLinks.forEach(link => {
       const href = link.getAttribute('href');
-      if (href === '#' + current) {
+      const targetId = link.getAttribute('id')?.replace('link-', '');
+      if (current && href === '#' + current && current === targetId) {
         link.classList.add('active');
       } else {
         link.classList.remove('active');
