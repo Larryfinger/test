@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-    <h1>Larryfinger</h1>
+    <h1>LLM</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
@@ -18,7 +18,7 @@
   </header>
 
   <div id="home" class="parallax-section">
-    <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
+    <img class="parallax-bg" src="intro.jpg" alt="Intro Background" />
     <div class="overlay"></div>
     <div class="section section-content">
       <h2>Witaj na mojej stronie</h2>
@@ -70,12 +70,12 @@
       });
 
       if (introSection) {
-  const fadeStart = 0;
-  const fadeEnd = window.innerHeight;
-  let opacity = 1 - (offset - fadeStart) / (fadeEnd - fadeStart);
-  opacity = Math.max(0.2, Math.min(1, opacity));
-  introSection.style.opacity = opacity;
-}
+        const fadeStart = 0;
+        const fadeEnd = window.innerHeight;
+        let opacity = 1 - (offset - fadeStart) / (fadeEnd - fadeStart);
+        opacity = Math.max(0.2, Math.min(1, opacity));
+        introSection.style.opacity = opacity;
+      }
     });
   </script>
 </body>
