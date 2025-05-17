@@ -69,7 +69,7 @@ nav a.active {
 </head>
 <body>
   <header>
-    <h1>RR</h1>
+    <h1>RP</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
@@ -129,8 +129,8 @@ navLinks.forEach(link => {
   }
 });
 
-function updateActiveLink() {
-  let fromTop = window.scrollY + 100; // uwzględnia wysokość menu
+    function updateActiveLink() {
+  let fromTop = window.scrollY + 100;
   sectionMap.forEach((section, link) => {
     const top = section.offsetTop;
     const bottom = top + section.offsetHeight;
@@ -141,7 +141,12 @@ function updateActiveLink() {
     }
   });
 }
-
+  });
+} else {
+          link.classList.remove('active');
+        }
+      });
+    }
 
     window.addEventListener('scroll', updateActiveLink);
     window.addEventListener('load', updateActiveLink);
