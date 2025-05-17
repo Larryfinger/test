@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" style="scroll-behavior: smooth;">
 <head>
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
@@ -69,7 +69,7 @@ nav a.active {
 </head>
 <body>
   <header>
-    <h1>QQ</h1>
+    <h1>RP</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
@@ -124,7 +124,7 @@ nav a.active {
 
   function updateActiveLink() {
     let current = '';
-    const fromTop = window.scrollY + 150;
+    const fromTop = window.scrollY + window.innerHeight / 2;
 
     document.querySelectorAll('section[id], div.parallax-section[id]').forEach(section => {
       const sectionTop = section.offsetTop;
@@ -165,19 +165,6 @@ nav a.active {
       opacity = Math.max(0, Math.min(0.8, opacity));
       darkenLayer.style.opacity = opacity;
     }
-  });
-  document.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const targetId = this.getAttribute('href').substring(1);
-      const target = document.getElementById(targetId);
-      if (target) {
-        window.scrollTo({
-          top: target.offsetTop - 100,
-          behavior: 'smooth'
-        });
-      }
-    });
   });
 </script>
 </body>
