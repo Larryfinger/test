@@ -129,8 +129,8 @@ navLinks.forEach(link => {
   }
 });
 
-    function updateActiveLink() {
-  let fromTop = window.scrollY + window.innerHeight / 2;
+function updateActiveLink() {
+  let fromTop = window.scrollY + 100; // uwzględnia wysokość menu
   sectionMap.forEach((section, link) => {
     const top = section.offsetTop;
     const bottom = top + section.offsetHeight;
@@ -140,11 +140,8 @@ navLinks.forEach(link => {
       link.classList.remove('active');
     }
   });
-} else {
-          link.classList.remove('active');
-        }
-      });
-    }
+}
+
 
     window.addEventListener('scroll', updateActiveLink);
     window.addEventListener('load', updateActiveLink);
