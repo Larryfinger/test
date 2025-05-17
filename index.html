@@ -59,7 +59,7 @@
 
   <script>
     const parallaxBgs = document.querySelectorAll('.parallax-bg');
-    const introBg = document.getElementById('intro-bg');
+    const introSection = document.getElementById('home');
 
     window.addEventListener('scroll', () => {
       const offset = window.pageYOffset;
@@ -69,13 +69,13 @@
         bg.style.transform = `translateY(${offset * speed}px)`;
       });
 
-      if (introBg) {
-        const fadeStart = 0;
-        const fadeEnd = window.innerHeight;
-        let opacity = 1 - (offset - fadeStart) / (fadeEnd - fadeStart);
-        opacity = Math.max(0.2, Math.min(1, opacity));
-        introBg.style.opacity = opacity;
-      }
+      if (introSection) {
+  const fadeStart = 0;
+  const fadeEnd = window.innerHeight;
+  let opacity = 1 - (offset - fadeStart) / (fadeEnd - fadeStart);
+  opacity = Math.max(0.2, Math.min(1, opacity));
+  introSection.style.opacity = opacity;
+}
     });
   </script>
 </body>
