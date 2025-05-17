@@ -69,7 +69,7 @@ nav a.active {
 </head>
 <body>
   <header>
-    <h1>RP</h1>
+    <h1>RR</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
@@ -124,13 +124,25 @@ nav a.active {
 
   function updateActiveLink() {
     let current = '';
-    const fromTop = window.scrollY + window.innerHeight / 3;
+    const fromTop = window.scrollY + 150;
 
-    document.querySelectorAll('section[id], div.parallax-section[id]').forEach(section => {
+    document.querySelectorAll('section[id], div[id].parallax-section').forEach(section => {
       const sectionTop = section.offsetTop;
-      if (fromTop >= sectionTop) {
+      const sectionHeight = section.offsetHeight;
+      if (fromTop >= sectionTop && fromTop < sectionTop + sectionHeight) {
         current = section.getAttribute('id');
       }
+    });
+
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href === '#' + current) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
     });
 
     navLinks.forEach(link => {
