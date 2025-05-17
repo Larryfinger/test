@@ -120,56 +120,50 @@ nav a.active {
   </section>
 
   <script>
-    const navLinks = document.querySelectorAll('nav a');
-const sectionMap = new Map();
-navLinks.forEach(link => {
-  const section = document.querySelector(link.hash);
-  if (section) {
-    sectionMap.set(link, section);
-  }
-});
-
-    function updateActiveLink() {
-  let fromTop = window.scrollY + 100;
-  sectionMap.forEach((section, link) => {
-    const top = section.offsetTop;
-    const bottom = top + section.offsetHeight;
-    if (fromTop >= top && fromTop < bottom) {
-      link.classList.add('active');
-    } else {
-      link.classList.remove('active');
+  const navLinks = document.querySelectorAll('nav a');
+  const sectionMap = new Map();
+  navLinks.forEach(link => {
+    const section = document.querySelector(link.hash);
+    if (section) {
+      sectionMap.set(link, section);
     }
   });
-}
-  });
-} else {
-          link.classList.remove('active');
-        }
-      });
-    }
 
-    window.addEventListener('scroll', updateActiveLink);
-    window.addEventListener('load', updateActiveLink);
-
-    const parallaxBgs = document.querySelectorAll('.parallax-bg');
-    const darkenLayer = document.getElementById('intro-darken');
-
-    window.addEventListener('scroll', () => {
-      const offset = window.pageYOffset;
-
-      parallaxBgs.forEach(bg => {
-        const speed = 0.3;
-        bg.style.transform = `translateY(${offset * speed}px)`;
-      });
-
-      if (darkenLayer) {
-        const fadeStart = 0;
-        const fadeEnd = window.innerHeight;
-        let opacity = (offset - fadeStart) / (fadeEnd - fadeStart);
-        opacity = Math.max(0, Math.min(0.8, opacity));
-        darkenLayer.style.opacity = opacity;
+  function updateActiveLink() {
+    const fromTop = window.scrollY + 120;
+    sectionMap.forEach((section, link) => {
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
+      if (fromTop >= top && fromTop < bottom) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
       }
     });
-  </script>
+  }
+
+  window.addEventListener('scroll', updateActiveLink);
+  window.addEventListener('load', updateActiveLink);
+
+  const parallaxBgs = document.querySelectorAll('.parallax-bg');
+  const darkenLayer = document.getElementById('intro-darken');
+
+  window.addEventListener('scroll', () => {
+    const offset = window.pageYOffset;
+
+    parallaxBgs.forEach(bg => {
+      const speed = 0.3;
+      bg.style.transform = `translateY(${offset * speed}px)`;
+    });
+
+    if (darkenLayer) {
+      const fadeStart = 0;
+      const fadeEnd = window.innerHeight;
+      let opacity = (offset - fadeStart) / (fadeEnd - fadeStart);
+      opacity = Math.max(0, Math.min(0.8, opacity));
+      darkenLayer.style.opacity = opacity;
+    }
+  });
+</script>
 </body>
 </html>
