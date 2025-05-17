@@ -79,7 +79,7 @@
 </head>
 <body>
   <header>
-    <h1>BB</h1>
+    <h1>EE</h1>
     <nav>
       <a href="#home" id="link-home">Strona główna</a>
       <a href="#about" id="link-about">O mnie</a>
@@ -89,15 +89,15 @@
   </header>
 
   <div id="home" class="parallax-section">
-    <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
-    <img id="intro-fg" class="parallax-bg parallax-slow" src="intro_2.png" alt="Overlay" />
-    <div class="darken-layer" id="intro-darken"></div>
-    <div class="overlay"></div>
-    <div class="section section-content">
-      <h2>Witaj na mojej stronie</h2>
-      <p>Fotografia. Pasja. Podróże.</p>
-    </div>
+  <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
+  <img id="intro-fg" class="parallax-bg parallax-slow" src="intro_2.png" alt="Overlay" />
+  <div class="darken-layer" id="intro-darken"></div>
+  <div class="overlay"></div>
+  <div class="section section-content">
+    <h2>Witaj na mojej stronie</h2>
+    <p>Fotografia. Pasja. Podróże.</p>
   </div>
+</div>
 
   <section id="about" class="section" style="background-color: #111;">
     <div class="section-content">
@@ -165,11 +165,13 @@
     window.addEventListener('scroll', () => {
       const offset = window.pageYOffset;
 
-      parallaxBgs.forEach(bg => {
-        let speed = 0.3;
-        if (bg.classList.contains('parallax-slow')) {
-          speed = 0.12; // mniejsza prędkość dla PNG overlay
-        }
+     parallaxBgs.forEach(bg => {
+  let speed = 0.3; // Domyślna prędkość
+  if (bg.classList.contains('parallax-slow')) {
+    speed = 0.15; // O połowę wolniej dla intro_2.png!
+  }
+  bg.style.transform = `translateY(${offset * speed}px)`;
+});
         bg.style.transform = `translateY(${offset * speed}px)`;
       });
 
