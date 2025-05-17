@@ -65,7 +65,7 @@
       height: 120%;
       object-fit: cover;
       transform: translateY(0);
-      transition: transform 0.1s ease-out;
+      transition: transform 0.1s ease-out, opacity 0.1s ease-out;
       z-index: 1;
     }
     .overlay {
@@ -99,7 +99,7 @@
   </header>
 
   <div id="home" class="parallax-section">
-    <img class="parallax-bg" src="intro.jpg" alt="Intro Background" />
+    <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
     <div class="overlay"></div>
     <div class="section section-content">
       <h2>Witaj na mojej stronie</h2>
@@ -140,12 +140,22 @@
 
   <script>
     const parallaxBgs = document.querySelectorAll('.parallax-bg');
+    const introBg = document.getElementById('intro-bg');
+
     window.addEventListener('scroll', () => {
+      const offset = window.pageYOffset;
+
       parallaxBgs.forEach(bg => {
         const speed = 0.3;
-        const offset = window.pageYOffset;
         bg.style.transform = `translateY(${offset * speed}px)`;
       });
+
+      // Zmiana opacity dla pierwszego zdjęcia
+      const fadeStart = 0;
+      const fadeEnd = window.innerHeight;
+      let opacity = 1 - (offset - fadeStart) / (fadeEnd - fadeStart);
+      opacity = Math.max(0.2, Math.min(1, opacity));
+      introBg.style.opacity = opacity;
     });
   </script>
 </body>
