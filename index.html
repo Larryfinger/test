@@ -6,6 +6,27 @@
   <title>Vlog Fotograficzny</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    header {
+      background: rgba(0, 0, 0, 0.0);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    header::after {
+      content: "";
+      display: block;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+    }
     #intro-bg {
       z-index: 0;
     }
@@ -20,30 +41,23 @@
       z-index: 3;
       pointer-events: none;
     }
-    #home {
-  position: relative;
-}
-
-#home .darken-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
-  will-change: opacity;
-  transform: translateZ(0);
-}
-
+    #home .darken-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.5s ease-out;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>SSS</h1>
+    <h1>QQ</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
