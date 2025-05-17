@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     header {
-      background: rgba(0, 0, 0, 0.0);
+      background: rgba(0, 0, 0, 0);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -16,16 +16,7 @@
       width: 100%;
       top: 0;
       z-index: 1000;
-    }
-    header::after {
-      content: "";
-      display: block;
-      position: absolute;
-      right: 0;
-      top: 0;
-      width: 4px;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
     }
     #intro-bg {
       z-index: 0;
@@ -57,7 +48,7 @@
 </head>
 <body>
   <header>
-    <h1>QQ</h1>
+    <h1>WW</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
