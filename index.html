@@ -8,12 +8,24 @@
   <style>
     #intro-bg {
       transition: opacity 0.5s ease-out;
+      z-index: 0;
+    }
+    #home .overlay {
+      background: none;
+      pointer-events: none;
+      z-index: 1;
+    }
+    #home .section-content {
+      background: transparent;
+      position: relative;
+      z-index: 2;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>BB</h1>
+    <h1>AA</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
@@ -24,7 +36,7 @@
 
   <div id="home" class="parallax-section">
     <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
-    <div class="overlay" style="background: none;"></div>
+    <div class="overlay"></div>
     <div class="section section-content">
       <h2>Witaj na mojej stronie</h2>
       <p>Fotografia. Pasja. Podróże.</p>
