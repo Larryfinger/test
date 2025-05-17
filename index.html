@@ -20,15 +20,15 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     #intro-bg {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: bottom;
-      z-index: 0;
-    }
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+  z-index: 0;
+}
     #home .overlay {
       background: none;
       pointer-events: none;
@@ -53,44 +53,23 @@
       transition: opacity 0.5s ease-out;
     }
     nav a {
-      font-family: 'Lato', sans-serif;
-      font-weight: 300;
-      text-decoration: none;
-      color: white;
-      padding: 0.5rem;
-      transition: color 0.3s ease;
-    }
-    nav a:hover,
-    nav a.active {
-      color: #ffcc00;
-    }
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  text-decoration: none;
+  color: white;
+  padding: 0.5rem;
+  transition: color 0.3s ease;
+}
 
-    /* Nowe style powitalnej sekcji */
-    .intro-content {
-      position: absolute;
-      top: 35%;
-      left: 40%;
-      transform: translate(-30%, -50%);
-      text-align: left;
-      z-index: 3;
-    }
-    .intro-heading {
-      font-size: 2.5rem;
-      font-weight: 300;
-      line-height: 1.1;
-      margin-bottom: 1rem;
-      letter-spacing: 1px;
-    }
-    .intro-sub {
-      font-size: 1.1rem;
-      font-weight: 300;
-      margin: 0;
-    }
+nav a:hover,
+nav a.active {
+  color: #ffcc00;
+}
   </style>
 </head>
 <body>
   <header>
-    <h1>SS</h1>
+    <h1>WW</h1>
     <nav>
       <a href="#home" id="link-home">Strona główna</a>
       <a href="#about" id="link-about">O mnie</a>
@@ -99,19 +78,15 @@
     </nav>
   </header>
 
- <div id="home" class="parallax-section">
-  <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
-  <img id="intro-fg" src="intro_2.png" alt="Overlay" class="intro-foreground" />
-  <div class="darken-layer" id="intro-darken"></div>
-  <div class="overlay"></div>
-  <div class="section section-content intro-content">
-    <h2 class="intro-heading">
-      Witaj na mojej<br>stronie
-    </h2>
-    <p class="intro-sub">Fotografia. Pasja. Podróże.</p>
+  <div id="home" class="parallax-section">
+    <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
+    <div class="darken-layer" id="intro-darken"></div>
+    <div class="overlay"></div>
+    <div class="section section-content">
+      <h2>Witaj na mojej stronie</h2>
+      <p>Fotografia. Pasja. Podróże.</p>
+    </div>
   </div>
-</div>
-
 
   <section id="about" class="section" style="background-color: #111;">
     <div class="section-content">
@@ -145,53 +120,53 @@
   </section>
 
   <script>
-    const navLinks = document.querySelectorAll('nav a');
+  const navLinks = document.querySelectorAll('nav a');
 
-    function updateActiveLink() {
-      let current = '';
-      const fromTop = window.scrollY + 150;
+  function updateActiveLink() {
+    let current = '';
+    const fromTop = window.scrollY + 150;
 
-      document.querySelectorAll('section[id], div.parallax-section[id]').forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        if (fromTop >= sectionTop && fromTop < sectionTop + sectionHeight) {
-          current = section.getAttribute('id');
-        }
-      });
-
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        const targetId = link.getAttribute('id')?.replace('link-', '');
-        if (current && href === '#' + current && current === targetId) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
-    }
-
-    window.addEventListener('scroll', updateActiveLink);
-    window.addEventListener('load', updateActiveLink);
-
-    const parallaxBgs = document.querySelectorAll('.parallax-bg');
-    const darkenLayer = document.getElementById('intro-darken');
-
-    window.addEventListener('scroll', () => {
-      const offset = window.pageYOffset;
-
-      parallaxBgs.forEach(bg => {
-        const speed = 0.3;
-        bg.style.transform = `translateY(${offset * speed}px)`;
-      });
-
-      if (darkenLayer) {
-        const fadeStart = 0;
-        const fadeEnd = window.innerHeight;
-        let opacity = (offset - fadeStart) / (fadeEnd - fadeStart);
-        opacity = Math.max(0, Math.min(0.8, opacity));
-        darkenLayer.style.opacity = opacity;
+    document.querySelectorAll('section[id], div.parallax-section[id]').forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+      if (fromTop >= sectionTop && fromTop < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
       }
     });
-  </script>
+
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      const targetId = link.getAttribute('id')?.replace('link-', '');
+      if (current && href === '#' + current && current === targetId) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink);
+  window.addEventListener('load', updateActiveLink);
+
+  const parallaxBgs = document.querySelectorAll('.parallax-bg');
+  const darkenLayer = document.getElementById('intro-darken');
+
+  window.addEventListener('scroll', () => {
+    const offset = window.pageYOffset;
+
+    parallaxBgs.forEach(bg => {
+      const speed = 0.3;
+      bg.style.transform = `translateY(${offset * speed}px)`;
+    });
+
+    if (darkenLayer) {
+      const fadeStart = 0;
+      const fadeEnd = window.innerHeight;
+      let opacity = (offset - fadeStart) / (fadeEnd - fadeStart);
+      opacity = Math.max(0, Math.min(0.8, opacity));
+      darkenLayer.style.opacity = opacity;
+    }
+  });
+</script>
 </body>
 </html>
