@@ -5,10 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vlog Fotograficzny</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    #home .overlay,
+    #home .section-content {
+      pointer-events: none;
+    }
+    #home .section-content {
+      transition: opacity 0.3s ease-out;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>LLM</h1>
+    <h1>MM</h1>
     <nav>
       <a href="#home">Strona główna</a>
       <a href="#about">O mnie</a>
@@ -18,9 +27,9 @@
   </header>
 
   <div id="home" class="parallax-section">
-    <img class="parallax-bg" src="intro.jpg" alt="Intro Background" />
+    <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
     <div class="overlay"></div>
-    <div class="section section-content">
+    <div class="section section-content" id="intro-content">
       <h2>Witaj na mojej stronie</h2>
       <p>Fotografia. Pasja. Podróże.</p>
     </div>
@@ -59,7 +68,8 @@
 
   <script>
     const parallaxBgs = document.querySelectorAll('.parallax-bg');
-    const introSection = document.getElementById('home');
+    const introBg = document.getElementById('intro-bg');
+    const introContent = document.getElementById('intro-content');
 
     window.addEventListener('scroll', () => {
       const offset = window.pageYOffset;
@@ -69,12 +79,13 @@
         bg.style.transform = `translateY(${offset * speed}px)`;
       });
 
-      if (introSection) {
+      if (introBg) {
         const fadeStart = 0;
         const fadeEnd = window.innerHeight;
         let opacity = 1 - (offset - fadeStart) / (fadeEnd - fadeStart);
         opacity = Math.max(0.2, Math.min(1, opacity));
-        introSection.style.opacity = opacity;
+        introBg.style.opacity = opacity;
+        if (introContent) introContent.style.opacity = opacity;
       }
     });
   </script>
