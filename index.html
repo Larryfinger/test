@@ -20,19 +20,30 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     #intro-bg {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: bottom;
-  z-index: 0;
-}
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom;
+      z-index: 0;
+    }
+    #intro-fg {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom;
+      z-index: 1; /* Nad tłem, pod tekstem */
+      pointer-events: none;
+    }
     #home .overlay {
       background: none;
       pointer-events: none;
-      z-index: 1;
+      z-index: 2;
     }
     #home .section-content {
       background: transparent;
@@ -53,23 +64,22 @@
       transition: opacity 0.5s ease-out;
     }
     nav a {
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
-  text-decoration: none;
-  color: white;
-  padding: 0.5rem;
-  transition: color 0.3s ease;
-}
-
-nav a:hover,
-nav a.active {
-  color: #ffcc00;
-}
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      text-decoration: none;
+      color: white;
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover,
+    nav a.active {
+      color: #ffcc00;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>WW</h1>
+    <h1>AA</h1>
     <nav>
       <a href="#home" id="link-home">Strona główna</a>
       <a href="#about" id="link-about">O mnie</a>
@@ -80,6 +90,7 @@ nav a.active {
 
   <div id="home" class="parallax-section">
     <img id="intro-bg" class="parallax-bg" src="intro.jpg" alt="Intro Background" />
+    <img id="intro-fg" class="parallax-bg parallax-slow" src="intro_2.png" alt="Overlay" />
     <div class="darken-layer" id="intro-darken"></div>
     <div class="overlay"></div>
     <div class="section section-content">
@@ -120,53 +131,56 @@ nav a.active {
   </section>
 
   <script>
-  const navLinks = document.querySelectorAll('nav a');
+    const navLinks = document.querySelectorAll('nav a');
 
-  function updateActiveLink() {
-    let current = '';
-    const fromTop = window.scrollY + 150;
+    function updateActiveLink() {
+      let current = '';
+      const fromTop = window.scrollY + 150;
 
-    document.querySelectorAll('section[id], div.parallax-section[id]').forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      if (fromTop >= sectionTop && fromTop < sectionTop + sectionHeight) {
-        current = section.getAttribute('id');
-      }
-    });
+      document.querySelectorAll('section[id], div.parallax-section[id]').forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        if (fromTop >= sectionTop && fromTop < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
 
-    navLinks.forEach(link => {
-      const href = link.getAttribute('href');
-      const targetId = link.getAttribute('id')?.replace('link-', '');
-      if (current && href === '#' + current && current === targetId) {
-        link.classList.add('active');
-      } else {
-        link.classList.remove('active');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', updateActiveLink);
-  window.addEventListener('load', updateActiveLink);
-
-  const parallaxBgs = document.querySelectorAll('.parallax-bg');
-  const darkenLayer = document.getElementById('intro-darken');
-
-  window.addEventListener('scroll', () => {
-    const offset = window.pageYOffset;
-
-    parallaxBgs.forEach(bg => {
-      const speed = 0.3;
-      bg.style.transform = `translateY(${offset * speed}px)`;
-    });
-
-    if (darkenLayer) {
-      const fadeStart = 0;
-      const fadeEnd = window.innerHeight;
-      let opacity = (offset - fadeStart) / (fadeEnd - fadeStart);
-      opacity = Math.max(0, Math.min(0.8, opacity));
-      darkenLayer.style.opacity = opacity;
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        const targetId = link.getAttribute('id')?.replace('link-', '');
+        if (current && href === '#' + current && current === targetId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
     }
-  });
-</script>
+
+    window.addEventListener('scroll', updateActiveLink);
+    window.addEventListener('load', updateActiveLink);
+
+    const parallaxBgs = document.querySelectorAll('.parallax-bg');
+    const darkenLayer = document.getElementById('intro-darken');
+
+    window.addEventListener('scroll', () => {
+      const offset = window.pageYOffset;
+
+      parallaxBgs.forEach(bg => {
+        let speed = 0.3;
+        if (bg.classList.contains('parallax-slow')) {
+          speed = 0.12; // mniejsza prędkość dla PNG overlay
+        }
+        bg.style.transform = `translateY(${offset * speed}px)`;
+      });
+
+      if (darkenLayer) {
+        const fadeStart = 0;
+        const fadeEnd = window.innerHeight;
+        let opacity = (offset - fadeStart) / (fadeEnd - fadeStart);
+        opacity = Math.max(0, Math.min(0.8, opacity));
+        darkenLayer.style.opacity = opacity;
+      }
+    });
+  </script>
 </body>
 </html>
